@@ -1,0 +1,6 @@
+streamlit
+huggingface-transformers
+faiss-cpu  
+langchain==0.0.225
+ctransformers==0.2.5
+sentence-transformers==2.2.2
