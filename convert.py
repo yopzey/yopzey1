@@ -28,8 +28,8 @@ def write_averages_to_csv(averages, headers, file_name):
             writer.writerow([gpu_id] + avg_row)
 
 # File names
-input_file = 'system_monitoring_data.csv'
-output_file = 'gpu_averages.csv'
+input_file = 'gpudata2.csv'
+output_file = 'gpu_averages3.csv'
 
 # Process the data
 headers, data = read_data(input_file)

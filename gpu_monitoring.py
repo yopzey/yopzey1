@@ -76,7 +76,6 @@ def get_network_usage():
         output = subprocess.check_output(['ifstat', '1', '1']).decode()
         # Parse the output and extract the network stats
         lines = output.strip().split('\n')
-        # Use the last line of output, assuming it has the network stats
         if lines[-1]:
             network_stats = lines[-1].split()
             up, down = float(network_stats[-2]), float(network_stats[-1])
@@ -125,7 +124,6 @@ def monitor(duration, interval):
             timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             gpu_data = get_gpu_data()
             cpu_usage = get_cpu_usage() or 0  # Use 0 if None is returned
-            # cpu_temp = get_cpu_temperature() or 0  # Not used if no sensors found
             ram_used, ram_total = get_ram_usage() or (0, 0)  # Use (0, 0) if None is returned
             disk_read, disk_write = get_disk_io() or (0, 0)  # Use (0, 0) if None is returned
             net_up, net_down = get_network_usage() or (0, 0)  # Use (0, 0) if None is returned
@@ -133,7 +131,6 @@ def monitor(duration, interval):
             # Combine data for all GPUs
             if gpu_data:
                 for gpu_stats in gpu_data:
-                    # Remove 'cpu_temp' from the list below
                     data_points.append([timestamp] + gpu_stats + [cpu_usage, ram_used, ram_total, disk_read, disk_write, net_up, net_down])
 
             # Sleep until the next update interval
@@ -142,8 +139,8 @@ def monitor(duration, interval):
                 time.sleep(time_to_sleep)
 
         # Save the collected data to CSV
-        save_to_csv(data_points, 'system_monitoring_data.csv')
-        print("\nMonitoring completed. Data saved to 'system_monitoring_data.csv'.")
+        save_to_csv(data_points, 'gpudata2.csv')  # Changed to 'gpudata2.csv'
+        print("\nMonitoring completed. Data saved to 'gpudata2.csv'.")  # Corrected print statement
     except Exception as e:
         print(f"An error occurred: {e}")
 
